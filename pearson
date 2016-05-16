@@ -1,0 +1,46 @@
+# -*- coding: utf-8 -*-
+from math import sqrt
+
+dic={'yasuhiro':{'a':5.0,'b':2.0,'c':4.0,'e':3.0,'g':2.0,'h':2.0},'takuro':{'a':4.0,'b':5.0,'d':1.0,'f':5.0,'h':10.0},'tomoko':{'a':2.0,'c':1.0,'e':2.0,'f':9.0,'h':5.0,'i':4.0}}
+totals={}
+simsum={}
+
+def q1(prefs,person):
+	for other in prefs:
+		if other!=person:
+			sim=q2(dic,person,other)
+		
+			for item in prefs[other]:
+				if item not in prefs[person] or prefs[person][item]==0:
+					totals.setdefault(item,0)
+					totals[item]+=prefs[other][item]*sim
+					simsum.setdefault(item,0)
+					simsum[item]+=sim
+	rankings=[(total/simsum[item],item) for item,total in totals.items()]
+	rankings.sort()
+	rankings.reverse()
+	return rankings
+
+
+
+def q2(prefs,p1,p2):
+	si={}
+	for item in prefs[p1]:
+		if item in prefs[p2]:
+			si[item]=0
+		
+	if len(si)==0:
+		return 0
+
+	sumx=sum([prefs[p1][item] for item in si])
+	sumy=sum([prefs[p2][item] for item in si])
+	sumxy=sum([prefs[p1][item]*prefs[p2][item] for item in si])
+	sumxsq=sum([pow(prefs[p1][item],2) for item in si])
+	sumysq=sum([pow(prefs[p2][item],2) for item in si])
+	
+	Sxy=sumxy-sumx*sumy/len(si)
+	Sxx=sumxsq-pow(sumx,2)/len(si)
+	Syy=sumysq-pow(sumy,2)/len(si)
+
+	sim_pearson=Sxy/sqrt(Sxx*Syy)
+	return sim_pearson

@@ -1,0 +1,19 @@
+dic={'yasuhiro':{'a':5.0,'b':2.0,'c':4.0,'e':3.0,'g':2.0,'h':2.0},'takuro':{'a':4.0,'b':5.0,'d':1.0,'f':5.0,'h':10.0},'tomoko':{'a':2.0,'c':1.0,'e':2.0,'f':9.0,'h':5.0,'i':4.0}}
+
+#setdefaultの書き方1
+job.dic.setdefault('yasuhiro',0)
+
+
+#setdefaultの書き方2
+job.dic['yasuhiro'].setdefault('a',0)
+
+#テスト1
+def q14(prefs):
+	prefs['yasuhiro'].setdefault('f',0)
+	print prefs['yasuhiro']['f']
+	
+	
+#テスト2
+def q15(prefs):
+	prefs['yasuhiro'].setdefault('a',0)
+	print prefs['yasuhiro']['a']

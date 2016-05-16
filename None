@@ -1,0 +1,23 @@
+
+import random
+
+class Dice():
+	def __init__(self,val):
+		self.face_num=val
+		
+	def shoot(self):
+		return random.randint(1,self.face_num)
+
+>>>Dice()
+＃エラーになる
+------------------------------------------------
+import random
+
+class Dice():
+	def __init__(self,val=None):
+		self.face_num=val
+		
+	def shoot(self):
+		return random.randint(1,self.face_num)
+>>>Dice()
+＃エラーにならない。なので、引数を2つ渡してあげるケースの時に、値をNoneが付いた方に値を渡さなくてもいい。
